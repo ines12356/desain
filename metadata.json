@@ -1,0 +1,6 @@
+{
+  "name": "Food Market & Customer Manager",
+  "description": "An interactive e-commerce food market application with categories, a direct shopping cart checkout, search, interactive AI chatbot support, and a comprehensive customer data dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

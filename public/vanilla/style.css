@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Food Market - Custom Vanilla Styles
+   ========================================================================== */
+
+/* Importing clean Inter and Mono fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* Smooth transition defaults for interactive tabs and modals */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar customizations */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Custom Nav link highlighting borders */
+.nav-link {
+  position: relative;
+  transition: all 0.25s ease-in-out;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #f59e0b; /* Amber 500 */
+  transition: all 0.2s ease-in-out;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Interactive Card Neobrutalism/Bouncing effects */
+.neobrutal-shadow {
+  box-shadow: 4px 4px 0px 0px rgba(15, 23, 42, 1); /* Slate 900 */
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+.neobrutal-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px rgba(15, 23, 42, 1);
+}
+
+.neobrutal-button {
+  box-shadow: 2px 2px 0px 0px rgba(15, 23, 42, 1);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.neobrutal-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px 0px rgba(15, 23, 42, 1);
+}
+
+/* Keyframe entrance animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Input text focus ring customizations */
+input:focus, textarea:focus, select:focus {
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 0 1px #f59e0b !important;
+}
+
+/* Circular ripple waves for ambient background animations */
+.avatar-bg-glow {
+  box-shadow: 0 0 20px 5px rgba(245, 158, 11, 0.15);
+}

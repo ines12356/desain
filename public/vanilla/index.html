@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Market - E-Commerce Makanan</title>
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS Link -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-white text-slate-800 antialiased selection:bg-amber-100 selection:text-amber-800">
+
+  <!-- ==================== 1. HEADER & NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 bg-white border-b-2 border-slate-900 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo Brand -->
+        <a href="#home" class="flex items-center gap-2 select-none" id="nav-logo">
+          <div class="w-10 h-10 border-2 border-amber-500 flex items-center justify-center bg-transparent rotate-45">
+            <span class="text-amber-500 font-bold font-mono text-sm uppercase -rotate-45">F</span>
+          </div>
+          <div class="hidden sm:block">
+            <h1 class="text-lg font-black tracking-widest text-slate-900 uppercase leading-none m-0">FOOD MARKET</h1>
+            <span class="text-[10px] font-mono text-amber-500 block uppercase tracking-widest leading-none mt-0.5">E-Commerce Makanan</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Items -->
+        <nav class="hidden md:flex items-center gap-6 font-semibold text-xs tracking-wider uppercase">
+          <a href="#" class="nav-link text-amber-500" data-tab="home">Home</a>
+          <a href="#" class="nav-link text-slate-600 hover:text-amber-500" data-tab="menu">Menu</a>
+          <a href="#" class="nav-link text-slate-600 hover:text-amber-500" data-tab="about">Tentang Kami</a>
+          <a href="#" class="nav-link text-slate-600 hover:text-amber-500" data-tab="pelanggan">Admin Pelanggan</a>
+        </nav>
+
+        <!-- Right Side Controls (Search, Cart, Admin Icon) -->
+        <div class="flex items-center gap-3">
+          
+          <!-- Quick Search Bar -->
+          <div class="relative hidden sm:block max-w-[200px] md:max-w-xs">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+              <i data-lucide="search" class="w-4 h-4"></i>
+            </span>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Cari makanan..." 
+              class="w-full pl-9 pr-3 py-1.5 bg-gray-50 text-xs font-sans border-2 border-slate-900 rounded-lg focus:outline-none focus:bg-white focus:ring-1 focus:ring-amber-500 transition-all font-medium"
+            >
+          </div>
+
+          <!-- Total Cart Button -->
+          <button 
+            id="cart-btn" 
+            class="relative flex items-center gap-2 px-3 py-2 bg-slate-900 hover:bg-slate-800 transition-all text-white border-2 border-slate-900 rounded-xl cursor-pointer"
+          >
+            <i data-lucide="shopping-cart" class="w-4 h-4 text-amber-400"></i>
+            <span class="hidden md:inline font-sans font-black text-xs uppercase">Keranjang</span>
+            <span 
+              id="cart-count" 
+              class="bg-amber-500 text-slate-950 font-mono text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-4 flex items-center justify-center h-4"
+            >0</span>
+          </button>
+
+          <!-- Admin Portal Fast Link Icon -->
+          <button 
+            id="admin-btn"
+            class="p-2 border-2 border-slate-900 text-slate-900 hover:text-amber-500 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer"
+            title="Sistem Admin Pelanggan CRM"
+          >
+            <i data-lucide="users" class="w-4 h-4"></i>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENTS CONTAINER ==================== -->
+  <main class="flex-1">
+
+    <!-- TAB 1: RETRO STOREFRONT (HOME, CATALOG, ABOUT) -->
+    <div id="tab-storefront" class="space-y-0">
+      
+      <!-- HERO COROUSEL BANNER SLIDER -->
+      <section class="relative bg-slate-950 text-white overflow-hidden py-16 sm:py-24 border-b-2 border-slate-900">
+        <!-- Abstract grid/waves backdrop effects -->
+        <div class="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
+        <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text Info Box -->
+          <div class="lg:col-span-7 space-y-6">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono font-bold text-amber-400 bg-amber-950/50 border border-amber-800/40 rounded-full uppercase tracking-wider">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse"></i> PROMO SPESIAL HARI INI - DISKON 30%
+            </span>
+            <h2 class="text-3xl sm:text-5xl lg:text-5.5xl font-black tracking-tight leading-none uppercase">
+              KULINER LEZAT<br>
+              <span class="text-amber-400">DIANTAR KILAT</span> DALAM KEADAAN HANGAT!
+            </h2>
+            <p class="text-sm sm:text-base text-gray-300 max-w-xl font-sans leading-relaxed">
+              Manjakan lidah Anda dengan masakan berkualitas berbahan organik 100%. Dilayani asisten pintar sedia setiap saat. Dapatkan juga modul admin CRM andal untuk membantu rekap data pesanan pelanggan Anda!
+            </p>
+            <div class="flex flex-wrap gap-4 pt-2">
+              <button 
+                id="hero-order-btn" 
+                class="px-6 py-3 bg-amber-500 text-slate-950 font-sans font-black text-xs uppercase tracking-widest border-2 border-amber-500 hover:bg-slate-950 hover:text-amber-400 transition-all rounded-xl cursor-pointer"
+              >
+                Pilih Menu Kuliner
+              </button>
+              <button 
+                id="hero-admin-btn" 
+                class="px-6 py-3 bg-slate-900 text-white font-sans font-bold text-xs uppercase tracking-widest border-2 border-gray-800 hover:border-amber-400 transition-colors rounded-xl cursor-pointer"
+              >
+                Kelola Pelanggan
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Promo Banner Side Visual -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative p-3 bg-white border-2 border-slate-900 shadow-[8px_8px_0px_0px_rgba(245,158,11,1)] rounded-2xl max-w-sm w-full font-mono text-center text-slate-800">
+              <img 
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&auto=format&fit=crop&q=80" 
+                alt="Highlight Pizza Lezat"
+                class="w-full h-64 object-cover rounded-lg border border-gray-200"
+              >
+              <div class="p-3 bg-slate-950 text-white rounded-lg mt-3 text-xs tracking-wider font-extrabold uppercase">
+                Pizza Premium Oven Baru
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CATEGORY SELECTION FILTERS -->
+      <section class="py-10 bg-white border-b border-gray-100" id="filter-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <h3 class="text-lg font-black tracking-widest uppercase text-slate-900">KATEGORI PILIHAN</h3>
+              <p class="text-[11px] font-mono uppercase text-gray-400 mt-0.5">Filter sajian sehat sesuai seleramu</p>
+            </div>
+            
+            <!-- Filter Pills Container -->
+            <div id="category-pills" class="flex flex-wrap items-center gap-2">
+              <button class="cat-pill px-4 py-2 bg-amber-500 text-slate-900 border-2 border-slate-900 text-xs font-black uppercase rounded-lg transition-all" data-category="Semua">Semua</button>
+              <button class="cat-pill px-4 py-2 bg-slate-50 text-slate-600 hover:bg-slate-100 border-2 border-transparent text-xs font-bold uppercase rounded-lg transition-all" data-category="Makanan Berat">Makanan Berat</button>
+              <button class="cat-pill px-4 py-2 bg-slate-50 text-slate-600 hover:bg-slate-100 border-2 border-transparent text-xs font-bold uppercase rounded-lg transition-all" data-category="Minuman">Minuman</button>
+              <button class="cat-pill px-4 py-2 bg-slate-50 text-slate-600 hover:bg-slate-100 border-2 border-transparent text-xs font-bold uppercase rounded-lg transition-all" data-category="Snack">Snack</button>
+              <button class="cat-pill px-4 py-2 bg-slate-50 text-slate-600 hover:bg-slate-100 border-2 border-transparent text-xs font-bold uppercase rounded-lg transition-all" data-category="Dessert">Dessert</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CATALOG INVENTORY DISPLAY GRID -->
+      <section class="py-12 bg-gray-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <!-- Catalog Header Summary -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div>
+              <h3 class="text-xl font-black tracking-widest text-slate-900 uppercase">DAFTAR KULINER</h3>
+              <p id="catalog-count-label" class="text-xs text-gray-400 font-mono mt-0.5 uppercase">SEMUA • 9 Menu Tersedia</p>
+            </div>
+            
+            <!-- Quick Search Input on Mobile Grid Header -->
+            <div class="relative sm:hidden block w-full">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                <i data-lucide="search" class="w-4 h-4"></i>
+              </span>
+              <input 
+                type="text" 
+                id="search-input-mobile" 
+                placeholder="Cari makanan..." 
+                class="w-full pl-9 pr-3 py-2 bg-white text-xs border-2 border-slate-900 rounded-lg focus:outline-none"
+              >
+            </div>
+          </div>
+
+          <!-- Catalog Cards (Populated Dynamically via Javascript) -->
+          <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <!-- Dynamic products will render here -->
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BRAND BENEFITS -->
+      <section class="py-16 bg-slate-900 text-white border-y-2 border-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            
+            <!-- Benefit 1 -->
+            <div class="flex flex-col items-center p-6 bg-slate-950 border border-slate-800 rounded-2xl relative">
+              <div class="w-12 h-12 flex items-center justify-center bg-amber-500 rounded-xl border border-slate-950 text-slate-950 -mt-12 mb-4 shadow-md rotate-3">
+                <i data-lucide="truck" class="w-5 h-5"></i>
+              </div>
+              <h4 class="text-sm font-black font-sans tracking-wide uppercase text-white">PENGIRIMAN 15-30 MENIT KILAT</h4>
+              <p class="text-xs text-slate-400 font-sans mt-2 leading-relaxed">Sistem logistik cerdas andalan kami memproses rute pengantaran tercepat untuk menjaga hidangan hangat terlindung mulus!</p>
+            </div>
+
+            <!-- Benefit 2 -->
+            <div class="flex flex-col items-center p-6 bg-slate-950 border border-slate-800 rounded-2xl relative">
+              <div class="w-12 h-12 flex items-center justify-center bg-green-500 rounded-xl border border-slate-950 text-white -mt-12 mb-4 shadow-md -rotate-3">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <h4 class="text-sm font-black font-sans tracking-wide uppercase text-white">HIGIENIS TERJAMIN 100%</h4>
+              <p class="text-xs text-slate-400 font-sans mt-2 leading-relaxed">Setiap olahan menu di steril menggunakan kotak kedap udara standar mutu internasional terbaik sebelum diserahterimakan ke kurir.</p>
+            </div>
+
+            <!-- Benefit 3 -->
+            <div class="flex flex-col items-center p-6 bg-slate-950 border border-slate-800 rounded-2xl relative">
+              <div class="w-12 h-12 flex items-center justify-center bg-cyan-500 rounded-xl border border-slate-950 text-white -mt-12 mb-4 shadow-md rotate-6">
+                <i data-lucide="headset" class="w-5 h-5"></i>
+              </div>
+              <h4 class="text-sm font-black font-sans tracking-wide uppercase text-white">ASISTEN DIGITAL INTELEKTUAL</h4>
+              <p class="text-xs text-slate-400 font-sans mt-2 leading-relaxed">Pasukan Chatbot asisten pintar sedia menemani Anda menelusuri menu lezat, panduan pemesanan, dan promo sedia sepanjang waktu.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT US "TENTANG KAMI" SECTION -->
+      <section class="py-16 bg-white" id="about-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Grid (Visual layout) -->
+            <div class="lg:col-span-5 flex justify-center">
+              <div class="relative p-3 bg-white border-2 border-slate-900 shadow-[8px_8px_0px_0px_rgba(245,158,11,1)] rounded-2xl max-w-sm w-full font-mono text-center">
+                <img 
+                  src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&auto=format&fit=crop&q=80" 
+                  alt="Restoran Food Market" 
+                  class="w-full h-80 object-cover rounded-lg border border-gray-200"
+                >
+                <div class="p-3 bg-slate-950 text-white rounded-lg mt-3 text-xs tracking-wider font-extrabold uppercase">
+                  CELEBRATING 20 YEARS OF TASTE
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Info Descs -->
+            <div class="lg:col-span-7 flex flex-col justify-center space-y-4">
+              <span class="text-xs font-mono font-bold text-amber-600 block bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-sm w-fit uppercase">
+                TENTANG KAMI
+              </span>
+              
+              <h3 class="text-2xl sm:text-3xl font-black tracking-tight leading-none text-slate-900 uppercase">
+                TEMPAT TERBAIK UNTUK MENIKMATI KULINER BERKELAS DAN HIGIENIS
+              </h3>
+
+              <p class="text-sm text-gray-600 font-sans leading-relaxed">
+                Didirikan sebagai bentuk dedikasi tinggi bagi para penggemar kuliner nusantara, <strong>Food Market</strong> menyajikan aneka olahan berkualitas mulai dari menu makanan berat menggoda selera, kudapan snack bersahabat, hingga dessert manis penyegar riang gembira.
+              </p>
+
+              <p class="text-sm text-gray-500 font-sans leading-relaxed">
+                Kami berkomitmen memprioritaskan rasa higienis pada setiap hidangan dapur terukur, mengirim secara kilat terproteksi segel aman (15-30 Menit), serta memelihara relasi andal pelanggan lewat modul integrasi database andalan ini.
+              </p>
+
+              <div class="grid grid-cols-2 gap-4 pt-4 border-t border-dashed border-gray-200">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="shield-check" class="w-5 h-5 text-green-500"></i>
+                  <span class="text-xs font-sans font-black text-slate-800">Bahan 100% Organik</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-amber-500"></i>
+                  <span class="text-xs font-sans font-black text-slate-800">Dapur Chef Berbintang</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- TAB 2: ELITE CRM CUSTOMER & ORDER ADMIN PORTAL -->
+    <div id="tab-admin" class="hidden animate-fade-in max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      
+      <!-- Top banner widget -->
+      <div class="p-6 sm:p-8 bg-slate-900 text-white rounded-2xl border-2 border-slate-950 mb-8 relative overflow-hidden shadow-sm">
+        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-950/40 border border-amber-800/30 px-2.5 py-1 rounded uppercase tracking-wider">
+              ELITE CRM PORTAL
+            </span>
+            <h2 class="text-2xl font-black font-sans uppercase tracking-tight mt-2.5">
+              SISTEM ADMIN PELANGGAN & TRANSAKSI
+            </h2>
+            <p class="text-xs text-gray-400 font-sans mt-1">
+              Pantau laporan transaksi, hubungkan data profil pesanan lokal, dan kendalikan estimasi logistik pengiriman instan.
+            </p>
+          </div>
+          <div>
+            <button 
+              id="admin-add-cust-btn"
+              class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 border-2 border-slate-950 text-slate-950 font-sans font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer flex items-center gap-2 "
+            >
+              <i data-lucide="plus" class="w-4 h-4"></i> Tambah Pelanggan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Ribbon Info -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <!-- Met 1 -->
+        <div class="bg-white border-2 border-slate-900 rounded-xl p-4 flex items-center gap-3 shadow-sm">
+          <div class="p-3 bg-amber-50 border border-amber-200 text-amber-600 rounded-lg">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="text-[10px] text-gray-400 font-mono block uppercase">Total Pelanggan</span>
+            <span id="metric-total-cust" class="text-base font-black font-sans text-slate-900">3</span>
+          </div>
+        </div>
+
+        <!-- Met 2 -->
+        <div class="bg-white border-2 border-slate-900 rounded-xl p-4 flex items-center gap-3 shadow-sm">
+          <div class="p-3 bg-blue-50 border border-blue-200 text-blue-600 rounded-lg">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="text-[10px] text-gray-400 font-mono block uppercase">Total Pesanan</span>
+            <span id="metric-total-orders" class="text-base font-black font-sans text-slate-900">2</span>
+          </div>
+        </div>
+
+        <!-- Met 3 -->
+        <div class="bg-white border-2 border-slate-900 rounded-xl p-4 flex items-center gap-3 shadow-sm">
+          <div class="p-3 bg-green-50 border border-green-200 text-green-600 rounded-lg">
+            <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="text-[10px] text-gray-400 font-mono block uppercase">Pendapatan kotor</span>
+            <span id="metric-total-income" class="text-base font-black font-sans text-slate-900">Rp 64.400</span>
+          </div>
+        </div>
+
+        <!-- Met 4 -->
+        <div class="bg-white border-2 border-slate-900 rounded-xl p-4 flex items-center gap-3 shadow-sm">
+          <div class="p-3 bg-purple-50 border border-purple-200 text-purple-600 rounded-lg">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="text-[10px] text-gray-400 font-mono block uppercase">Loyal Member</span>
+            <span id="metric-top-cust" class="text-xs font-bold font-sans text-slate-900 truncate block max-w-[140px]">Inestrisan Harianja</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Grid Layout Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Tab panel A: DATA BASE PELANGGAN (Left 7 Columns) -->
+        <div class="lg:col-span-7 bg-white border-2 border-slate-900 rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b-2 border-dashed border-gray-150">
+            <div>
+              <h3 class="text-base font-black text-slate-900 uppercase">Database Pelanggan</h3>
+              <p class="text-[10px] text-gray-400 font-mono uppercase">Data kontak lokal dan riwayat loyalitas belanja</p>
+            </div>
+            
+            <!-- Quick Filter Search Contact -->
+            <input 
+              type="text" 
+              id="admin-search-cust" 
+              placeholder="Cari nama/email..." 
+              class="px-2.5 py-1 text-xs border border-slate-900 rounded bg-gray-50 font-medium"
+            >
+          </div>
+
+          <!-- Customer Cards Listing (Populated in javascript) -->
+          <div id="admin-customers-container" class="space-y-4 divide-y divide-gray-100 max-h-[500px] overflow-y-auto pr-1">
+            <!-- Dynamic list -->
+          </div>
+        </div>
+
+        <!-- Tab panel B: TRANSAKSI MASUK / QUEUE LOGS (Right 5 Columns) -->
+        <div class="lg:col-span-5 bg-white border-2 border-slate-900 rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="pb-3 border-b-2 border-dashed border-gray-150">
+            <h3 class="text-base font-black text-slate-900 uppercase">Antrean Transaksi Pesanan</h3>
+            <p class="text-[10px] text-gray-400 font-mono uppercase">Rincian invoice pesanan dan status pengiriman</p>
+          </div>
+
+          <!-- Order Queue lists (Populated in javascript via orders array) -->
+          <div id="admin-orders-container" class="space-y-4 max-h-[500px] overflow-y-auto pr-1">
+            <!-- Dynamic order item elements -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== 3. FOOTER ==================== -->
+  <footer class="bg-slate-950 text-gray-400 pt-16 pb-8 font-sans border-t-2 border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-gray-800">
+        
+        <!-- Brand Description Box -->
+        <div class="lg:col-span-4 space-y-4">
+          <div class="flex items-center gap-2 select-none">
+            <div class="w-10 h-10 border-2 border-amber-500 flex items-center justify-center bg-transparent relative rotate-45">
+              <span class="text-amber-400 font-bold m-0 font-mono text-sm uppercase -rotate-45">F</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-sans font-extrabold tracking-widest text-white uppercase m-0 leading-tight">
+                FOOD MARKET
+              </h3>
+              <span class="text-[10px] font-mono text-amber-500 block uppercase tracking-widest leading-none mt-[-2px]">
+                E-Commerce Makanan
+              </span>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-400 leading-relaxed max-w-sm font-sans pt-1">
+            Tempat terbaik untuk menemukan makanan lezat berkualitas tinggi dan terjamin diantar dengan selamat dan hangat. Pelayanan ramah, andal, dengan asisten digital sedia setia membantu 24 jam.
+          </p>
+
+          <!-- Social links -->
+          <div class="flex items-center gap-3 pt-2">
+            <a href="https://facebook.com" class="p-2 bg-slate-900 hover:border-amber-400 hover:text-white border border-gray-800 transition-all text-gray-400 rounded-full">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </a>
+            <a href="https://instagram.com" class="p-2 bg-slate-900 hover:border-amber-400 hover:text-white border border-gray-800 transition-all text-gray-400 rounded-full">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+            <a href="https://whatsapp.com" class="p-2 bg-slate-900 hover:border-amber-400 hover:text-white border border-gray-800 transition-all text-gray-400 rounded-full">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Links Navigation -->
+        <div class="lg:col-span-2 space-y-4">
+          <h5 class="text-xs font-mono font-bold text-white tracking-widest uppercase mb-1">MENU UTAMA</h5>
+          <ul class="space-y-2 text-xs font-sans">
+            <li><a href="#" class="nav-link-foot hover:text-amber-400 transition-colors uppercase" data-tab="home">Home</a></li>
+            <li><a href="#" class="nav-link-foot hover:text-amber-400 transition-colors uppercase" data-tab="menu">Menu Makanan</a></li>
+            <li><a href="#" class="nav-link-foot hover:text-amber-400 transition-colors uppercase" data-tab="about">Tentang Kami</a></li>
+            <li><a href="#" class="nav-link-foot hover:text-amber-400 transition-colors uppercase" data-tab="pelanggan">Admin Pelanggan</a></li>
+          </ul>
+        </div>
+
+        <!-- Support Policy links -->
+        <div class="lg:col-span-3 space-y-4">
+          <h5 class="text-xs font-mono font-bold text-white tracking-widest uppercase mb-1">BANTUAN & PANDUAN</h5>
+          <ul class="space-y-2 text-xs font-sans">
+            <li class="hover:text-amber-400 cursor-pointer uppercase">Cara Pemesanan</li>
+            <li class="hover:text-amber-400 cursor-pointer uppercase">Metode Pembayaran Aman</li>
+            <li class="hover:text-amber-400 cursor-pointer uppercase">Ketentuan Pengembalian</li>
+            <li class="hover:text-amber-400 cursor-pointer uppercase">Kebijakan Privasi</li>
+            <li class="hover:text-amber-400 cursor-pointer uppercase">FAQ & Bantuan Medis</li>
+          </ul>
+        </div>
+
+        <!-- Contact Box -->
+        <div class="lg:col-span-3 space-y-4 text-xs font-sans leading-relaxed">
+          <h5 class="text-xs font-mono font-bold text-white tracking-widest uppercase mb-1">KONTAK KAMI</h5>
+          
+          <div class="space-y-3 font-mono text-gray-400">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="phone" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>0812-3456-7890</span>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="instagram" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span>@Foodmarket.id</span>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <span class="font-sans leading-tight">jl.kuliner no.124 jakarta barat</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- End note -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
+        <p class="text-[11px] text-gray-500 font-mono uppercase tracking-wider">
+          © 2026 FOOD MARKET ALL RIGHTS RESERVED.
+        </p>
+        <p class="text-[10px] sm:text-xs text-gray-500 font-sans flex items-center justify-center gap-1 leading-none">
+          Created for Indonesian Food Lovers.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== 4. SHOPPING CART OVERLAY MODAL ==================== -->
+  <div id="cart-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white border-2 border-slate-900 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl relative animate-scale-up">
+      
+      <!-- Modal head -->
+      <div class="p-6 border-b-2 border-slate-900 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-amber-500"></i>
+          <h3 class="text-lg font-black tracking-wide text-slate-900 uppercase">Keranjang Belanja</h3>
+        </div>
+        <button id="close-cart-btn" class="p-1 px-3 border border-gray-300 hover:border-slate-950 font-sans font-bold text-xs rounded uppercase hover:bg-slate-50 transition-colors cursor-pointer">
+          Tutup ×
+        </button>
+      </div>
+
+      <!-- Modal Body (Two-columns layout inside) -->
+      <div class="flex-1 overflow-y-auto p-6 grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Left Side: Order Items List (7 Columns) -->
+        <div class="md:col-span-7 space-y-4">
+          <h4 class="text-xs font-mono font-bold text-gray-400 uppercase tracking-widest">Detail Item Belanja</h4>
+          <div id="cart-items-list" class="space-y-3 max-h-[280px] overflow-y-auto pr-1">
+            <!-- Dynamic elements rendering -->
+          </div>
+          
+          <div class="pt-3 border-t border-dashed border-gray-200">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-gray-500">Metode Pengiriman:</span>
+              <span class="font-sans font-bold text-slate-800">Kurir Kilat (15-30 Menit)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Contact Details Form & Checkout Info (5 Columns) -->
+        <div class="md:col-span-5 bg-slate-55 border border-slate-900/10 p-4 rounded-2xl space-y-4 bg-slate-50/75">
+          <h4 class="text-xs font-mono font-bold text-slate-800 uppercase tracking-wider">Biodata & Pengiriman</h4>
+          
+          <form id="checkout-form" class="space-y-3 text-xs">
+            <div>
+              <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Nama Lengkap *</label>
+              <input type="text" id="check-name" placeholder="cth: Inestrisan Harianja" required class="w-full p-2 border border-slate-900 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Alamat Email *</label>
+              <input type="email" id="check-email" placeholder="cth: inestrisaniharianja1@gmail.com" required class="w-full p-2 border border-slate-900 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">No. WhatsApp Aktif *</label>
+              <input type="tel" id="check-phone" placeholder="cth: 0812-3456-7890" required class="w-full p-2 border border-slate-900 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Alamat Pengiriman *</label>
+              <textarea id="check-address" placeholder="cth: Jl. Kuliner No.124, Jakarta Barat" required rows="2" class="w-full p-2 border border-slate-900 rounded-lg font-sans"></textarea>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- Modal Footer actions totals -->
+      <div class="p-6 border-t-2 border-slate-900 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <p class="text-[10px] font-mono text-gray-400 uppercase">Subtotal Rincian belanja (Sertai Diskon 30%):</p>
+          <p id="cart-total-price" class="text-xl font-black font-sans text-slate-900">Rp 0</p>
+        </div>
+        
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button id="cart-clear-btn" class="px-4 py-2 border border-neutral-300 rounded-lg text-xs font-bold font-sans uppercase text-gray-500 hover:text-red-500 hover:bg-neutral-50 cursor-pointer">
+            Kosongkan
+          </button>
+          <button id="cart-submit-btn" class="flex-1 sm:flex-none px-6 py-2.5 bg-green-600 hover:bg-green-700 transition-colors uppercase text-white font-sans font-black text-xs tracking-wider rounded-xl cursor-pointer">
+            Konfirmasi Pesanan
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 5. CHATBOT FLOATING FLOATING COMPONENT ==================== -->
+  <div id="chatbot-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    
+    <!-- Floating Circular Button Trigger -->
+    <button id="chatbot-trigger" class="w-14 h-14 bg-slate-900 border-2 border-slate-800 hover:border-amber-400 flex items-center justify-center text-amber-400 rounded-full cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-all">
+      <i data-lucide="message-square" class="w-6 h-6" id="chat-icon-normal"></i>
+      <i data-lucide="x" class="w-6 h-6 hidden" id="chat-icon-close"></i>
+    </button>
+
+    <!-- Chat Dialogue Box Window (hidden by default) -->
+    <div id="chatbot-box" class="w-[325px] sm:w-[360px] h-[450px] bg-white border-2 border-slate-900 rounded-2xl shadow-xl hidden flex-col overflow-hidden mb-3 animate-slide-up">
+      
+      <!-- Head -->
+      <div class="p-4 border-b-2 border-slate-900 bg-slate-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-slate-950 font-mono font-bold text-xs">
+            🤖
+          </div>
+          <div>
+            <h4 class="text-xs font-black font-sans tracking-wide uppercase leading-tight">Asisten Food Market</h4>
+            <span class="text-[8px] font-mono text-amber-400 uppercase tracking-widest leading-none block mt-0.5">Online • Dukungan AI 24 Jam</span>
+          </div>
+        </div>
+        <button id="chatbot-close-cross" class="text-white hover:text-amber-400 text-sm font-black">×</button>
+      </div>
+
+      <!-- Messages Stream (dynamically generated in script) -->
+      <div id="chatbot-messages" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50/50 text-xs">
+        <!-- Messages populate here -->
+      </div>
+
+      <!-- Input Actions -->
+      <div class="p-3 border-t-2 border-slate-900 bg-white flex items-center gap-1.5">
+        <input 
+          type="text" 
+          id="chatbot-input" 
+          placeholder="Ketik pesan bantuan..." 
+          class="flex-1 px-3 py-1.5 border border-slate-900 rounded-lg text-xs focus:outline-none"
+        >
+        <button id="chatbot-send-btn" class="p-2 bg-slate-900 rounded-lg text-amber-400 border border-slate-900 hover:bg-slate-800 cursor-pointer">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== 6. BACK TO TOP SCROLL ARROW BUTTON ==================== -->
+  <button 
+    id="scroll-top-btn" 
+    class="fixed bottom-6 left-6 z-40 bg-slate-900 border border-slate-700 hover:border-amber-400 p-3 rounded-xl hover:bg-slate-800 text-amber-300 shadow-md transition-all scale-100 hidden hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center"
+    title="Kembali ke atas"
+  >
+    <i data-lucide="arrow-up" class="w-4.5 h-4.5 stroke-[3px]"></i>
+  </button>
+
+  <!-- ==================== 7. CUSTOMER REGISTRATION MODAL FORM ==================== -->
+  <div id="cust-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white border-2 border-slate-900 rounded-3xl w-full max-w-md overflow-hidden shadow-2xl relative animate-scale-up">
+      <div class="p-6 border-b-2 border-slate-900 bg-slate-50 flex items-center justify-between">
+        <h3 id="cust-modal-title" class="text-base font-black text-slate-900 uppercase">Tambah Pelanggan Baru</h3>
+        <button id="close-cust-btn" class="p-1 px-2.5 border border-gray-300 font-bold text-xs rounded uppercase hover:bg-white cursor-pointer">×</button>
+      </div>
+
+      <form id="cust-form" class="p-6 space-y-4 text-xs font-sans">
+        <input type="hidden" id="cust-edit-id">
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Nama Pelanggan *</label>
+          <input type="text" id="cust-name" required class="w-full p-2 border border-slate-900 rounded-lg">
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Alamat Email *</label>
+          <input type="email" id="cust-email" required class="w-full p-2 border border-slate-900 rounded-lg">
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">No. Handphone/WA *</label>
+          <input type="tel" id="cust-phone" required class="w-full p-2 border border-slate-900 rounded-lg">
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Alamat Domisili lengkap *</label>
+          <textarea id="cust-address" required rows="2" class="w-full p-2 border border-slate-900 rounded-lg"></textarea>
+        </div>
+        <div>
+          <label class="block text-[10px] font-mono font-bold text-gray-500 uppercase mb-1">Catatan Khusus (Opsional)</label>
+          <input type="text" id="cust-notes" class="w-full p-2 border border-slate-900 rounded-lg">
+        </div>
+
+        <div class="pt-4 border-t border-dashed border-gray-200 flex items-center justify-end gap-2">
+          <button type="button" id="cancel-cust-btn" class="px-4 py-2 text-gray-400 hover:text-slate-800 uppercase font-bold text-[10px]">Batal</button>
+          <button type="submit" class="px-5 py-2 bg-amber-500 text-slate-950 hover:bg-amber-600 border border-slate-950 uppercase font-black tracking-wide text-xs rounded-xl">Simpan Data</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading script file -->
+  <script src="script.js"></script>
+</body>
+</html>
